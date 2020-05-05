@@ -14,7 +14,7 @@ class UtilManagement
      * @param bool $authorize_origin
      * @throws LocalizedException
      */
-    public static function setStatusForReviewByKount(PaymentDataObjectInterface $paymentDO, Logger $logger, bool $authorize_origin = false)
+    public static function setStatusForReviewByKount(PaymentDataObjectInterface $paymentDO, Logger $logger, bool $authorize_origin = null)
     {
         /** @var Payment $payment */
         $payment = $paymentDO->getPayment();
@@ -24,7 +24,7 @@ class UtilManagement
             $logger->debug('UtilManagement.setStatusForReviewByKount Setting Pending');
             $payment->setIsTransactionPending(1);
             $payment->setAdditionalInformation('update_in_handler', (boolean)1);
-            $payment->save();
+            // $payment->save();
             $logger->debug(sprintf('UtilManagement.setStatusForReviewByKount orderState: %s - orderStatus: %s', $order->getState(), $order->getStatus()));
 
         } elseif ($payment->getAdditionalInformation('update_in_handler')) {
@@ -34,6 +34,7 @@ class UtilManagement
             $payment->setAdditionalInformation('update_in_handler', (boolean)0);
             $payment->save();
             $logger->debug(sprintf('UtilManagement.setStatusForReviewByKount orderState: %s - orderStatus: %s', $order->getState(), $order->getStatus()));
+            echo('<script>window.location.reload()</script>');
         }
     }
 }

@@ -27,7 +27,6 @@ class AuthorizeHandler implements HandlerInterface
     public function __construct(GatewayConfig $config)
     {
         $this->logger = $config->logger;
-//        $this->subjectReader = $subjectReader;
     }
 
     /**
@@ -65,7 +64,7 @@ class AuthorizeHandler implements HandlerInterface
         $payment->setIsTransactionClosed(0);
 
         // TODO: Review by Kount is status_detail 1
-        if ($status_detail == 3) {
+        if ($status_detail == 1) {
             UtilManagement::setStatusForReviewByKount($paymentDO, $this->logger, true);
         }
     }
