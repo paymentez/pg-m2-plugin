@@ -11,12 +11,17 @@ define(
         rendererList
     ) {
         'use strict';
-        rendererList.push(
-            {
-                type: 'paymentez_card',
-                component: 'Paymentez_PaymentGateway/js/view/payment/method-renderer/paymentez_card'
-            }
-        );
+
+        const config = window.checkoutConfig.payment;
+
+        if (config.paymentez_card.is_active) {
+            rendererList.push(
+                {
+                    type: 'paymentez_card',
+                    component: 'Paymentez_PaymentGateway/js/view/payment/method-renderer/paymentez_card'
+                }
+            );
+        }
         /** Add view logic here if needed */
         return Component.extend({});
     }

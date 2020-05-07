@@ -6,21 +6,23 @@ define(
         'Magento_Checkout/js/model/quote',
         'Magento_Customer/js/model/customer',
         'Magento_Checkout/js/model/full-screen-loader',
+        'Magento_Ui/js/model/messageList',
+        'mage/translate',
         'https://cdn.paymentez.com/ccapi/sdk/payment_2.3.min.js?no_cache=' + Math.random().toString(36).substring(7),
     ],
-    function (Component, quote, customer, fullScreenLoader) {
+    function (Component, quote, customer, fullScreenLoader, messageList, $t) {
         'use strict';
 
         return Component.extend({
             defaults: {
                 template: 'Paymentez_PaymentGateway/payment/paymentez_card',
-                installment: ''
+                installment: '',
             },
 
             initObservable: function () {
                 this._super()
                     .observe([
-                        'installment'
+                        'installment',
                     ]);
                 return this;
             },
@@ -56,7 +58,7 @@ define(
             },
 
             getSupportedBrands: function () {
-                return this.getPaymentConfig().brands ? this.getPaymentConfig().brands.toLowerCase() : '';
+                return this.getPaymentConfig().brands ? this.getPaymentConfig().brands.join(',').toLowerCase() : '';
             },
 
             getCredentials: function () {
@@ -68,19 +70,15 @@ define(
             },
 
             showError: function (code) {
-                console.log('LANCÉ ERROR');
-                let message = `Lo sentimos, tu pago no pudo ser procesado. (code: ${code})`;
+                let message = $t('Sorry, your payment could not be processed. (Code: %1)').replace('%1', code);
                 fullScreenLoader.stopLoader();
-                console.log('LANCÉ ERROR');
-                console.log(message);
-                console.log(this);
-                console.log(this.messageContainer);
-                window.messageContainer = this.messageContainer;
                 return this.messageContainer.addErrorMessage({message});
             },
 
             initPayment: function () {
+                this.messageContainer = messageList;
                 let context = this;
+
                 try {
                     jQuery(document).ready(function () {
                         let credentials = context.getCredentials();
@@ -150,7 +148,8 @@ define(
             getAvailableInstallments: function () {
                 let installments = [{'value': 1, 'text': `Total - $ ${this.getTotal()}`}];
                 for (let i = 2; i <= 36; i++) {
-                    installments.push({'value': i, 'text': `${i} installments`});
+                    let text = $t('%1 installments').replace('%1', i);
+                    installments.push({'value': i, 'text': text});
                 }
                 return installments;
             }

@@ -29,4 +29,15 @@ class Brand implements OptionSourceInterface
             ['value' => 'CN', 'label' => 'Carnet'],
         ];
     }
+
+    public static function getBrandName(string $brand)
+    {
+        $options = (new Brand)->toOptionArray();
+        foreach ($options as $option) {
+            if ($option['value'] == strtoupper($brand)) {
+                return $option['label'];
+            }
+        }
+        return $brand;
+    }
 }

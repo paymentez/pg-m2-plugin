@@ -34,27 +34,42 @@ class CaptureClient extends AbstractClient
         $this->adapter->init($credentials['application_code'], $credentials['application_key'], $is_production);
 
         $charge = $this->adapter::charge();
-        $extra_data = $request_body['extra_data'];
+
+        /** @var Payment $payment */
+        $payment = $request_body['objects']['payment'];
+        $order_obj = $request_body['objects']['order'];
+
         $response = [];
 
-        if (!isset($extra_data['transaction_id'])) {
+        if (is_null($payment->getParentTransactionId())) {
             $this->logger->debug('CaptureClient.process Authorization is required...');
-            /** @var Payment $payment */
-            $payment = $request_body['objects']['payment'];
+            $payment->setAdditionalInformation('is_direct_capture', 1);
             $payment->authorize(1, $request_body['order']['amount']);
-            $extra_data['transaction_id'] = $payment->getTransactionId();
         }
 
-        if (Currency::validateForAuthorize($extra_data['currency'])) {
+        if ($payment->getAdditionalInformation('status_detail') == '1') {
+            $user = [
+                'id' => $request_body['user']['id']
+            ];
+            $this->logger->debug('CaptureClient.process Use verify for review transactions...');
+            $response = $charge->verify('BY_AMOUNT', (string)$request_body['order']['amount'], $payment->getParentTransactionId(), $user, true);
+            return (array)$response;
+        }
+
+        if (Currency::validateForAuthorize($order_obj->getCurrencyCode())) {
             $this->logger->debug('CaptureClient.process Consuming Capture...');
-            $response = $charge->capture($extra_data['transaction_id']);
+            $amount = isset($extra_data['additional_amount']) ? $extra_data['additional_amount'] : $request_body['order']['amount'];
+            $response = $charge->capture($payment->getParentTransactionId(), $amount, true);
         } else {
             $this->logger->debug('CaptureClient.process Use mock for debited transactions...');
             $response = [
                 'transaction' => [
-                    'id' => $extra_data['transaction_id'],
+                    'id' => $payment->getParentTransactionId(),
                     'status' => 'success',
-                    'status_detail' => 3
+                    'status_detail' => $payment->getAdditionalInformation('status_detail'),
+                    'authorization_code' => $payment->getAdditionalInformation('authorization_code'),
+                    'message' => $payment->getAdditionalInformation('message'),
+                    'carrier_code' => $payment->getAdditionalInformation('carrier_code'),
                 ],
             ];
         }

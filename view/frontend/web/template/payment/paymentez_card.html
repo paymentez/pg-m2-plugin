@@ -21,9 +21,8 @@
 
         <div id="paymentez_sdk_form"
              class="payment-form"
-             data-capture-name="true"
-             data-bing="data-exclusive-type: getSupportedBrands()"
-             data-bind="afterRender: initPayment">
+             data-bind="attr: {'data-exclusive-types': getSupportedBrands(), 'data-capture-name': true},
+             afterRender: initPayment">
             SOME WAS WRONG!!
             <div class="installments-wrapper required">
                 <select name="payment[installment]"

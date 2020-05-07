@@ -1,0 +1,54 @@
+"Sorry, your payment could not be processed. (Code: %1)","Lo sentimos, tu pago no pudo ser procesado. (Code: %1)"
+"Invalid Payment Method","Medio de pago inválido"
+"Sorry, your payment could not be processed. (Code: ERR01)","Lo sentimos, tu pago no pudo ser procesado. (Code: ERR01)"
+"Sorry, your refund could not be processed. (Code: %1)","Lo sentimos, tu reembolso no pudo ser procesado. (Code: %1)"
+Mexico,Mexico
+Ecuador,Ecuador
+Colombia,Colombia
+Brazil,Brasil
+Peru,Peru
+Argentina,Argentina
+Venezuela,Venezuela
+Chile,Chile
+"Mexican Peso","Peso Mexicano"
+"US Dollar","US Dolar"
+"Colombian Peso","Peso Colombiano"
+"Brazilian Real","Real Brasileño"
+"Peruvian Nuevo Sol","Sol Peruano"
+"Argentine Peso","Peso Argentino"
+"Venezuelan Bolívar","Bolívar Venezolano"
+"Chilean Peso","Peso Chileno"
+Staging,Desarrollo
+Production,Producción
+Authorize,Autorización
+"Authorize & Capture","Autorización & Captura"
+"Place Order","Realizar pedido"
+Paymentez,Paymentez
+Enabled,Habilitar
+"Card Options","Opciones Tarjeta"
+"Active pay with card","Activar pago con tarjeta"
+Title,Título
+Environment,Ambiente
+"Payment Action","Acción de pago"
+"Supported Brands","Marcas soportadas"
+"Allow Installments","Permitir cuotas"
+"Minimum Order Total","Mínimo Total de Orden"
+"Maximum Order Total","Máximo Total de Order"
+"Leave empty to disable limit","Dejar vacía para desactivar el límite"
+"Sort Order","Orden de clasificación"
+"LinkToPay Options","Opciones LinkToPay"
+"Active pay with LTP","Activar pago con LTP"
+Credentials,Credenciales
+"Production Server Application Code","Production Server Application Code"
+"Production Server Application Key","Production Server Application Key"
+"Production Client Application Code","Production Client Application Code"
+"Production Client Application Key","Production Client Application Key"
+"Staging Server Application Code","Staging Server Application Code"
+"Staging Server Application Key","Staging Server Application Key"
+"Staging Client Application Code","Staging Client Application Code"
+"Staging Client Application Key","Staging Client Application Key"
+"Supported Countries","Países soportados"
+"Supported Currencies","Monedas soportadas"
+Debug,Debug
+"In how many installments do you want to pay?","¿En cuantas cuotas desea pagar?"
+"%1 installments","%1 cuotas"

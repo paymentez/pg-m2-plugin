@@ -73,12 +73,11 @@ class TransactionRequest implements BuilderInterface
                 'token' => $payment->getAdditionalInformation('token')
             ],
             'extra_data' => [
-                'currency' => $order->getCurrencyCode(),
-                'transaction_id' => $payment->getParentTransactionId(),
                 'additional_amount' => isset($buildSubject['amount']) ? $buildSubject['amount'] : null,  // User only for refund, validate if apply for capture and authorize
             ],
             'objects' => [
-                'payment' => $payment
+                'payment' => $payment,
+                'order' => $order,
             ]
         ];
 

@@ -42,9 +42,13 @@ class CaptureHandler implements HandlerInterface
             throw new MagentoValidatorException(__('Sorry, your payment could not be processed. (Code: ERR01)'));
         }
 
-        $status = $response['transaction']['status'];
-        $transactionId = $response['transaction']['id'];
-        $status_detail = $response['transaction']['status_detail'];
+        $transaction = $response['transaction'];
+
+        $status = $transaction['status'];
+        $authorization_code = isset($transaction['authorization_code']) ? $transaction['authorization_code'] : null;
+        $status_detail = $transaction['status_detail'];
+        $message = $transaction['message'];
+        $carrier_code = $transaction['carrier_code'];
 
         if ($status !== 'success') {
             $rejected_msg = __('Sorry, your payment could not be processed. (Code: %1)', $status_detail);
@@ -53,11 +57,15 @@ class CaptureHandler implements HandlerInterface
 
         /** @var PaymentDataObjectInterface $paymentDO */
         $paymentDO = $handlingSubject['payment'];
-        $payment = $paymentDO->getPayment();
-        $order = $paymentDO->getOrder();
         /** @var Payment $payment */
+        $payment = $paymentDO->getPayment();
 
-        $payment->setTransactionId($transactionId);
+        $transaction_id = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
+        $payment->setAdditionalInformation('authorization_code', $authorization_code);
+        $payment->setAdditionalInformation('status_detail', $status_detail);
+        $payment->setAdditionalInformation('message', $message);
+        $payment->setAdditionalInformation('carrier_code', $carrier_code);
+        $payment->setTransactionId($transaction_id);
         $payment->setIsTransactionClosed(1);
     }
 }

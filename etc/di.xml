@@ -7,7 +7,7 @@
         <arguments>
             <argument name="code" xsi:type="const">Paymentez\PaymentGateway\Gateway\Config\CardConfig::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
-            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\ConfigurableInfo</argument>
+            <argument name="infoBlockType" xsi:type="string">Paymentez\PaymentGateway\Block\Info</argument>
             <argument name="valueHandlerPool" xsi:type="object">CardPaymentValueHandlerPool</argument>
             <argument name="validatorPool" xsi:type="object">CardPaymentValidatorPool</argument>
             <argument name="commandPool" xsi:type="object">CardPaymentCommandPool</argument>

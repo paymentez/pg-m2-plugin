@@ -1,1 +1,52 @@
-"FRAUD_MSG_LIST","Fraud Messages"
+"Sorry, your payment could not be processed. (Code: %1)","Sorry, your payment could not be processed. (Code: %1)"
+"Invalid Payment Method","Invalid Payment Method"
+"Sorry, your payment could not be processed. (Code: ERR01)","Sorry, your payment could not be processed. (Code: ERR01)"
+"Sorry, your refund could not be processed. (Code: %1)","Sorry, your refund could not be processed. (Code: %1)"
+Mexico,Mexico
+Ecuador,Ecuador
+Colombia,Colombia
+Brazil,Brazil
+Peru,Peru
+Argentina,Argentina
+Venezuela,Venezuela
+Chile,Chile
+"Mexican Peso","Mexican Peso"
+"US Dollar","US Dollar"
+"Colombian Peso","Colombian Peso"
+"Brazilian Real","Brazilian Real"
+"Peruvian Nuevo Sol","Peruvian Nuevo Sol"
+"Argentine Peso","Argentine Peso"
+"Venezuelan Bolívar","Venezuelan Bolívar"
+"Chilean Peso","Chilean Peso"
+Staging,Staging
+Production,Production
+Authorize,Authorize
+"Authorize & Capture","Authorize & Capture"
+"Place Order","Place Order"
+Paymentez,Paymentez
+Enabled,Enabled
+"Card Options","Card Options"
+"Active pay with card","Active pay with card"
+Title,Title
+Environment,Environment
+"Payment Action","Payment Action"
+"Supported Brands","Supported Brands"
+"Allow Installments","Allow Installments"
+"Minimum Order Total","Minimum Order Total"
+"Maximum Order Total","Maximum Order Total"
+"Leave empty to disable limit","Leave empty to disable limit"
+"Sort Order","Sort Order"
+"LinkToPay Options","LinkToPay Options"
+"Active pay with LTP","Active pay with LTP"
+Credentials,Credentials
+"Production Server Application Code","Production Server Application Code"
+"Production Server Application Key","Production Server Application Key"
+"Production Client Application Code","Production Client Application Code"
+"Production Client Application Key","Production Client Application Key"
+"Staging Server Application Code","Staging Server Application Code"
+"Staging Server Application Key","Staging Server Application Key"
+"Staging Client Application Code","Staging Client Application Code"
+"Staging Client Application Key","Staging Client Application Key"
+"Supported Countries","Supported Countries"
+"Supported Currencies","Supported Currencies"
+Debug,Debug

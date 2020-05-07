@@ -45,23 +45,41 @@ class AuthorizeHandler implements HandlerInterface
             throw new MagentoValidatorException(__('Sorry, your payment could not be processed. (Code: ERR01)'));
         }
 
-        $status = $response['transaction']['status'];
-        $transaction_id = $response['transaction']['id'];
-        $status_detail = $response['transaction']['status_detail'];
+        $transaction = $response['transaction'];
+        $card = $response['card'];
 
-        if ($status == 'failure') {
-            $rejected_msg = __('Sorry, your payment could not be processed. (Code: %1)', $status_detail);
-            throw new MagentoValidatorException($rejected_msg);
-        }
+        $status = $transaction['status'];
+        $transaction_id = $transaction['id'];
+        $authorization_code = isset($transaction['authorization_code']) ? $transaction['authorization_code'] : null;
+        $status_detail = $transaction['status_detail'];
+        $message = $transaction['message'];
+        $carrier_code = $transaction['carrier_code'];
+        $card_tr = $card['transaction_reference'];
+        $card_bin = $card['bin'];
+        $card_termination = $card['number'];
+        $card_type = $card['type'];
 
         /** @var PaymentDataObjectInterface $paymentDO */
         $paymentDO = $handlingSubject['payment'];
         /** @var Payment $payment */
         $payment = $paymentDO->getPayment();
-        $order = $payment->getOrder();
+
+        $is_direct_capture = $payment->getAdditionalInformation('is_direct_capture');
+        if (($is_direct_capture && $status != 'success') || (!$is_direct_capture && $status == 'failure')) {
+            $rejected_msg = __('Sorry, your payment could not be processed. (Code: %1)', $status_detail);
+            throw new MagentoValidatorException($rejected_msg);
+        }
 
         $payment->setTransactionId($transaction_id);
         $payment->setIsTransactionClosed(0);
+        $payment->setAdditionalInformation('authorization_code', $authorization_code);
+        $payment->setAdditionalInformation('status_detail', $status_detail);
+        $payment->setAdditionalInformation('message', $message);
+        $payment->setAdditionalInformation('carrier_code', $carrier_code);
+        $payment->setAdditionalInformation('card_tr', $card_tr);
+        $payment->setAdditionalInformation('card_bin', $card_bin);
+        $payment->setAdditionalInformation('card_termination', $card_termination);
+        $payment->setAdditionalInformation('card_type', $card_type);
 
         // TODO: Review by Kount is status_detail 1
         if ($status_detail == 1) {

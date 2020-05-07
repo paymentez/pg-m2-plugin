@@ -36,9 +36,10 @@ class AuthorizeClient extends AbstractClient
         $card_token = $request_body['card']['token'];
         $order = $request_body['order'];
         $user = $request_body['user'];
-        $extra_data = $request_body['extra_data'];
+        
+        $order_obj = $request_body['objects']['order'];
 
-        if (Currency::validateForAuthorize($extra_data['currency'])) {
+        if (Currency::validateForAuthorize($order_obj->getCurrencyCode())) {
             $this->logger->debug('AuthorizeClient.process Consuming Authorize...');
             $response = $charge->authorize($card_token, $order, $user);
         } else {

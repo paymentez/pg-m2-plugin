@@ -2,33 +2,14 @@
 
 namespace Paymentez\PaymentGateway\Block;
 
+use Magento\Framework\DataObject;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
-use Magento\Framework\View\Element\Template\Context;
 use Magento\Payment\Block\ConfigurableInfo;
-use Magento\Payment\Gateway\ConfigInterface;
-use Paymentez\PaymentGateway\Gateway\Response\FraudHandler;
-use Paymentez\PaymentGateway\Helper\Logger;
+use Paymentez\PaymentGateway\Model\Adminhtml\Source\Brand;
 
 class Info extends ConfigurableInfo
 {
-    /**
-     * @var Logger
-     */
-    public $logger;
-
-    /**
-     * Info constructor.
-     * @param Context $context
-     * @param ConfigInterface $config
-     * @param Logger $logger
-     * @param array $data
-     */
-    public function __construct(Context $context, ConfigInterface $config, Logger $logger, array $data = [])
-    {
-        parent::__construct($context, $config, $data);
-        $this->logger = $logger;
-    }
-
     /**
      * Returns label
      *
@@ -37,26 +18,35 @@ class Info extends ConfigurableInfo
      */
     protected function getLabel($field)
     {
-        $this->logger->debug(sprintf('Info.getLabel => %s', $field));
         return __($field);
     }
 
     /**
-     * Returns value view
+     * Prepare information to show
      *
-     * @param string $field
-     * @param string $value
-     * @return string | Phrase
+     * @param DataObject|array|null $transport
+     * @return DataObject
+     * @throws LocalizedException
      */
-    protected function getValueView($field, $value)
+    protected function _prepareSpecificInformation($transport = null)
     {
-        switch ($field) {
-            case FraudHandler::FRAUD_MSG_LIST:
-                $this->logger->debug(sprintf('Info.getValueView => %s', implode('; ', $value)));
-                return implode('; ', $value);
+        $transport = parent::_prepareSpecificInformation($transport);
+        $payment = $this->getInfo();
+        $info = [
+            'Card' => sprintf('%s XXXX %s', $payment->getAdditionalInformation('card_bin'), $payment->getAdditionalInformation('card_termination')),
+            'Card Type' => Brand::getBrandName($payment->getAdditionalInformation('card_type')),
+            'Authorization Code' => $payment->getAdditionalInformation('authorization_code'),
+            'Installments' => $payment->getAdditionalInformation('installment')
+        ];
+
+        if (!$this->getIsSecureMode()) {
+            $info['Carrier Code'] = $payment->getAdditionalInformation('carrier_code');
+            $info['Message'] = $payment->getAdditionalInformation('message');
+            $info['Status Detail'] = $payment->getAdditionalInformation('status_detail');
+            $info['Add Card Transaction'] = $payment->getAdditionalInformation('card_tr');
         }
-        $this->logger->debug(sprintf('Info.getValueView => %s - %s', $field, $value));
-        return parent::getValueView($field, $value);
+
+        return $transport->addData($info);
     }
 
 }
