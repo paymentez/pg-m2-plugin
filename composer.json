@@ -3,7 +3,7 @@
     "description": "Paymentez integration for Magento 2",
     "require": {
         "magento/magento-composer-installer": "^0.1.13",
-        "paymentez/sdk": "1.2.0"
+        "paymentez/sdk": "^1"
     },
     "type": "magento2-module",
     "version": "2.1.0",
