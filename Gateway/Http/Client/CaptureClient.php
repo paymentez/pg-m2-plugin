@@ -55,16 +55,17 @@ class CaptureClient extends AbstractClient
             $response = $charge->verify('BY_AMOUNT', (string)$request_body['order']['amount'], $payment->getParentTransactionId(), $user, true);
             return (array)$response;
         }
+        $transaction_id = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
 
         if (Currency::validateForAuthorize($order_obj->getCurrencyCode())) {
             $this->logger->debug('CaptureClient.process Consuming Capture...');
             $amount = isset($extra_data['additional_amount']) ? $extra_data['additional_amount'] : $request_body['order']['amount'];
-            $response = $charge->capture($payment->getParentTransactionId(), $amount, true);
+            $response = $charge->capture($transaction_id, $amount, true);
         } else {
             $this->logger->debug('CaptureClient.process Use mock for debited transactions...');
             $response = [
                 'transaction' => [
-                    'id' => $payment->getParentTransactionId(),
+                    'id' => $transaction_id,
                     'status' => 'success',
                     'status_detail' => $payment->getAdditionalInformation('status_detail'),
                     'authorization_code' => $payment->getAdditionalInformation('authorization_code'),
