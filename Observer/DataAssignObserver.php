@@ -39,9 +39,6 @@ class DataAssignObserver extends AbstractDataAssignObserver
         $additional_data = $data->getDataByKey('additional_data');
 
         switch ($data->getDataByKey('method')) {
-            default:
-                throw new MagentoValidatorException(__("Invalid Payment Method"));
-                break;
 
             case CardConfig::CODE:
                 $installment = isset($additional_data['installment']) ? $additional_data['installment'] : 1;
