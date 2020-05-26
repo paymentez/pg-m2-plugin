@@ -19,6 +19,12 @@
             <!--/ko-->
         </div>
 
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
         <div id="paymentez_sdk_form"
              class="payment-form"
              data-bind="attr: {'data-exclusive-types': getSupportedBrands(), 'data-capture-name': true},
