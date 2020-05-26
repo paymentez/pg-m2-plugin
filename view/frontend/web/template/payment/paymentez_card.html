@@ -24,7 +24,7 @@
              data-bind="attr: {'data-exclusive-types': getSupportedBrands(), 'data-capture-name': true},
              afterRender: initPayment">
             SOME WAS WRONG!!
-            <div class="installments-wrapper required">
+            <div class="installments-wrapper required" data-bind="visible: allowInstallments()">
                 <select name="payment[installment]"
                         required="required"
                         class="select"
