@@ -23,6 +23,7 @@ Production,Production
 Authorize,Authorize
 "Authorize & Capture","Authorize & Capture"
 "Place Order","Place Order"
+"%1 installments","%1 installments"
 Paymentez,Paymentez
 Enabled,Enabled
 "Card Options","Card Options"
@@ -50,3 +51,4 @@ Credentials,Credentials
 "Supported Countries","Supported Countries"
 "Supported Currencies","Supported Currencies"
 Debug,Debug
+"In how many installments do you want to pay?","In how many installments do you want to pay?"
