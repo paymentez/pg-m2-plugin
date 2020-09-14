@@ -7,6 +7,7 @@ use Magento\Framework\Validator\Exception as MagentoValidatorException;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 use Magento\Sales\Model\Order\Payment;
+use Paymentez\PaymentGateway\Config\Handler\CanRefundHandler;
 use Paymentez\PaymentGateway\Gateway\Config\GatewayConfig;
 use Paymentez\PaymentGateway\Helper\Logger;
 
@@ -53,7 +54,7 @@ class RefundHandler implements HandlerInterface
         $detail = $response['detail'];
         $amount = isset($transaction['refund_amount']) ? $transaction['refund_amount'] : $transaction['amount'];
 
-        if ($status == 'failure') {
+        if (!in_array($status_detail, $this->GetRefundStatusDetails())) {
             $rejected_msg = __('Sorry, your refund could not be processed. (Code: %1)', $detail);
             throw new MagentoValidatorException($rejected_msg);
         }
@@ -73,5 +74,10 @@ class RefundHandler implements HandlerInterface
         $payment->setIsTransactionClosed(1);
         $payment->setShouldCloseParentTransaction(1);
         $this->logger->debug(sprintf('RefundHandler.handle Closed transaction: %s', $transaction_id));
+    }
+
+    public function GetRefundStatusDetails()
+    {
+        return [6, 7, 8, 27, 28, 29, 34, 40, 44, 45, 46];
     }
 }
