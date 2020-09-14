@@ -53,7 +53,12 @@ class CaptureClient extends AbstractClient
             ];
             $this->logger->debug('CaptureClient.process Use verify for review transactions...');
             $response = $charge->verify('BY_AMOUNT', (string)$request_body['order']['amount'], $payment->getParentTransactionId(), $user, true);
-            return (array)$response;
+
+            $transaction = $response['transaction'];
+            $status_detail = $transaction['status_detail'];
+            if ($status_detail !== 0) {
+                return (array)$response;
+            }
         }
         $transaction_id = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
 
