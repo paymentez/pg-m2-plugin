@@ -3,6 +3,7 @@
 namespace Paymentez\PaymentGateway\Gateway\Http\Client;
 
 use Magento\Sales\Model\Order\Payment;
+use Paymentez\Exceptions\PaymentezErrorException;
 use Paymentez\Paymentez;
 use Paymentez\PaymentGateway\Gateway\Config\CardConfig;
 use Paymentez\PaymentGateway\Gateway\Config\GatewayConfig;
@@ -52,13 +53,21 @@ class CaptureClient extends AbstractClient
                 'id' => $request_body['user']['id']
             ];
             $this->logger->debug('CaptureClient.process Use verify for review transactions...');
-            $response = $charge->verify('BY_AMOUNT', (string)$request_body['order']['amount'], $payment->getParentTransactionId(), $user, true);
 
-            $transaction = $response['transaction'];
-            $status_detail = $transaction['status_detail'];
-            if ($status_detail !== 0) {
-                return (array)$response;
+            try {
+                $response = (array)$charge->verify('BY_AMOUNT', (string)$request_body['order']['amount'], $payment->getParentTransactionId(), $user, true);
+                $response = json_decode(json_encode($response), true);
+                $status_detail = $response['transaction']['status_detail'];
+                if ($status_detail !== 0) {
+                    return $response;
+                }
+            } catch (PaymentezErrorException $e) {
+                $code = $e->getCode();
+                if ($code !== 403) {
+                    throw $e;
+                }
             }
+
         }
         $transaction_id = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
 
