@@ -74,7 +74,26 @@ class CaptureClient extends AbstractClient
         if (Currency::validateForAuthorize($order_obj->getCurrencyCode())) {
             $this->logger->debug('CaptureClient.process Consuming Capture...');
             $amount = isset($extra_data['additional_amount']) ? $extra_data['additional_amount'] : $request_body['order']['amount'];
-            $response = $charge->capture($transaction_id, $amount, true);
+            try {
+                $response = $charge->capture($transaction_id, $amount, true);
+            } catch (PaymentezErrorException $e) {
+                $message = $e->getMessage();
+                if (strpos($message, "Transaction already captured") !== false) {
+                    $response = [
+                        'transaction' => [
+                            'id' => $transaction_id,
+                            'status' => 'success',
+                            'status_detail' => 3,
+                            'authorization_code' => $payment->getAdditionalInformation('authorization_code'),
+                            'message' => $payment->getAdditionalInformation('message'),
+                            'carrier_code' => $payment->getAdditionalInformation('carrier_code'),
+                        ],
+                    ];
+                } else {
+                    throw $e;
+                }
+            }
+
         } else {
             $this->logger->debug('CaptureClient.process Use mock for debited transactions...');
             $response = [
