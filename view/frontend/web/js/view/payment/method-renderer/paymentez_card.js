@@ -142,7 +142,12 @@ define(
             },
 
             getTotal: function () {
-                return window.checkoutConfig.totalsData.grand_total;
+              if (totals.totals()) {
+                  var grandTotal = parseFloat(totals.totals()['grand_total']);
+                  return grandTotal;
+                } else {
+                    return window.checkoutConfig.totalsData.grand_total;
+              }
             },
 
             getAvailableInstallments: function () {
