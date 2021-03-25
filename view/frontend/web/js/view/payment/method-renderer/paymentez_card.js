@@ -6,11 +6,12 @@ define(
         'Magento_Checkout/js/model/quote',
         'Magento_Customer/js/model/customer',
         'Magento_Checkout/js/model/full-screen-loader',
+        'Magento_Checkout/js/model/totals',
         'Magento_Ui/js/model/messageList',
         'mage/translate',
         'https://cdn.paymentez.com/ccapi/sdk/payment_stable.min.js?no_cache=' + Math.random().toString(36).substring(7),
     ],
-    function (Component, quote, customer, fullScreenLoader, messageList, $t) {
+    function (Component, quote, customer, fullScreenLoader, totals, messageList, $t) {
         'use strict';
 
         return Component.extend({
@@ -142,12 +143,12 @@ define(
             },
 
             getTotal: function () {
-              if (totals.totals()) {
-                  var grandTotal = parseFloat(totals.totals()['grand_total']);
-                  return grandTotal;
+                if (totals.totals()) {
+                    var grandTotal = parseFloat(totals.totals()['grand_total']);
+                    return grandTotal;
                 } else {
                     return window.checkoutConfig.totalsData.grand_total;
-              }
+                }
             },
 
             getAvailableInstallments: function () {
