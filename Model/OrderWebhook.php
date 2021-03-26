@@ -30,7 +30,6 @@ class OrderWebhook implements WebhookInterface
     * @param RequestInterface $request
     * @param OrderInterface $order
     * @param GatewayConfig $config
-    * @throws Exception
     */
     public function __construct(Logger $logger, OrderInterface $order, GatewayConfig $config) {
         $this->order  = $order;
@@ -39,7 +38,8 @@ class OrderWebhook implements WebhookInterface
     }
 
     /**
-    *
+    * Method that manages the update order via webhook.
+    * @return Exception
     */
     public function updateOrderWebhook() {
       $params           = json_decode(file_get_contents('php://input'), true);
@@ -99,7 +99,7 @@ class OrderWebhook implements WebhookInterface
     * @param string $application_code
     * @param string $pg_stoken
     * @param GatewayConfig $config
-    * @throws Exception
+    * @return Exception
     */
     private function validateStoken($user_id, $transaction_id, $application_code, $pg_stoken, $config) {
         $credentials_client = $config->getServerCredentials();
