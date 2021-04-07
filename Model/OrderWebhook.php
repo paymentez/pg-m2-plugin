@@ -1,8 +1,9 @@
 <?php
 namespace Paymentez\PaymentGateway\Model;
 
-use \Magento\Sales\Api\Data\OrderInterface;
-use \Magento\Framework\Webapi\Exception;
+use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Webapi\Exception;
 
 use Paymentez\PaymentGateway\Api\WebhookInterface;
 use Paymentez\PaymentGateway\Helper\Logger;
@@ -15,14 +16,21 @@ class OrderWebhook implements WebhookInterface
      * @var Logger
      */
     protected $logger;
+
     /**
     * @var OrderInterface
     */
     protected $order;
+
     /**
     * @var GatewayConfig
     */
     protected $config;
+
+    /**
+    * @var ScopeConfigInterface
+    */
+    protected $scopeConfig;
 
     /**
     * OrderWebhook constructor.
@@ -30,11 +38,17 @@ class OrderWebhook implements WebhookInterface
     * @param RequestInterface $request
     * @param OrderInterface $order
     * @param GatewayConfig $config
+    * @param ScopeConfigInterface $scopeConfig
     */
-    public function __construct(Logger $logger, OrderInterface $order, GatewayConfig $config) {
+    public function __construct(
+        Logger $logger,
+        OrderInterface $order,
+        GatewayConfig $config,
+        ScopeConfigInterface $scopeConfig
+    ) {
         $this->order  = $order;
-        $this->config = $config;
         $this->logger = $logger;
+        $this->config = new GatewayConfig($scopeConfig, $this->logger);
     }
 
     /**
@@ -55,7 +69,7 @@ class OrderWebhook implements WebhookInterface
       $amount           = (float)$params["transaction"]['amount'];
       $user_id          = $params["user"]['id'];
 
-      $this->validateStoken($user_id, $transaction_id, $application_code, $pg_stoken, $this->config);
+      $this->validateStoken($user_id, $transaction_id, $application_code, $pg_stoken);
 
       $order = $this->order->loadByIncrementId($dev_reference);
       if (!$order->getId()) {
@@ -98,12 +112,12 @@ class OrderWebhook implements WebhookInterface
     * @param string $transaction_id
     * @param string $application_code
     * @param string $pg_stoken
-    * @param GatewayConfig $config
-    * @return Exception
+    * @return void
+    * @throws Exception
     */
-    private function validateStoken($user_id, $transaction_id, $application_code, $pg_stoken, $config) {
-        $credentials_client = $config->getServerCredentials();
-        $credentials_server = $config->getClientCredentials();
+    private function validateStoken($user_id, $transaction_id, $application_code, $pg_stoken) {
+        $credentials_client = $this->config->getServerCredentials();
+        $credentials_server = $this->config->getClientCredentials();
         $codes_keys         = [
             $credentials_client['application_code'] => $credentials_client['application_key'],
             $credentials_server['application_code'] => $credentials_server['application_key'],
