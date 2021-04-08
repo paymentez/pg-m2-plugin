@@ -79,10 +79,8 @@ class OrderWebhook implements WebhookInterface
       if ($order->getStatus() == $order::STATE_COMPLETE) {
           throw new Exception(__('Order status is complete, can\'t change.'), 0, Exception::HTTP_BAD_REQUEST);
       }
-
       $payment = $order->getPayment();
       $payment->setAdditionalInformation('authorization_code', $auth_code);
-      $payment->setAdditionalInformation('status_detail', $status_detail);
       $payment->setAdditionalInformation('message', $message);
       $payment->setAdditionalInformation('carrier_code', $carrier_code);
 
@@ -93,16 +91,15 @@ class OrderWebhook implements WebhookInterface
           8 => $order::STATE_CANCELED,
       ];
       $status_code = $pg_status_m2[$status_detail];
-      if (in_array($status_detail, [2, 3, 4, 5, 30, 38, 39, 41, 42, 43]) || $status_code == $order::STATE_CANCELED) {
+      if (in_array($status_detail, [2, 3, 4, 5, 30, 38, 39, 41, 42, 43]) && $status_code == $order::STATE_CANCELED) {
           $transaction_id_m2 = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
           $payment->setAmountCanceled($amount);
           $payment->setTransactionId($transaction_id_m2);
           $payment->setIsTransactionClosed(1);
           $payment->setShouldCloseParentTransaction(1);
-      } else {
-          $order->setStatus($status_code);
-          $order->save();
       }
+      $order->setStatus($status_code);
+      $order->save();
       $payment->save();
     }
 
