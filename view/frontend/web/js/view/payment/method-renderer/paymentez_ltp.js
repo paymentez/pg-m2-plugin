@@ -4,9 +4,10 @@ define(
     [
         'Magento_Checkout/js/view/payment/default',
         'Magento_Checkout/js/action/redirect-on-success',
-        'mage/url'
+        'mage/url',
+        'mage/translate'
     ],
-    function (Component, redirectOnSuccessAction, url) {
+    function (Component, redirectOnSuccessAction, url, $t) {
         'use strict';
 
         return Component.extend({

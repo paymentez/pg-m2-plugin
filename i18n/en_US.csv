@@ -1,3 +1,7 @@
+"Please agree to all the terms and conditions before placing the order.","Please agree to all the terms and conditions before placing the order."
+"Order could not be generated.","Order could not be generated."
+"LinkToPay could not be generated for this order.","LinkToPay could not be generated for this order."
+"We can't place the last order.","We can't place the last order."
 "Sorry, your payment could not be processed. (Code: %1)","Sorry, your payment could not be processed. (Code: %1)"
 "Invalid Payment Method","Invalid Payment Method"
 "Sorry, your payment could not be processed. (Code: ERR01)","Sorry, your payment could not be processed. (Code: ERR01)"
@@ -22,6 +26,9 @@ Staging,Staging
 Production,Production
 Authorize,Authorize
 "Authorize & Capture","Authorize & Capture"
+"Order not found","Order not found"
+"Order status is complete, can't change.","Order status is complete, can't change."
+"stokens did not match.","stokens did not match."
 "Place Order","Place Order"
 "%1 installments","%1 installments"
 Paymentez,Paymentez
@@ -39,6 +46,8 @@ Environment,Environment
 "Sort Order","Sort Order"
 "LinkToPay Options","LinkToPay Options"
 "Active pay with LTP","Active pay with LTP"
+"Allow Partial Payments","Allow Partial Payments"
+"Expiration Days for LinkToPay","Expiration Days for LinkToPay"
 Credentials,Credentials
 "Production Server Application Code","Production Server Application Code"
 "Production Server Application Key","Production Server Application Key"

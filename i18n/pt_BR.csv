@@ -1,3 +1,7 @@
+"Please agree to all the terms and conditions before placing the order.","Concorde com todos os termos e condições antes de fazer o pedido."
+"Order could not be generated.","Não foi possível gerar o pedido."
+"LinkToPay could not be generated for this order.","Não foi possível gerar LinkToPay para este pedido."
+"We can't place the last order.","Não podemos fazer o último pedido."
 "Sorry, your payment could not be processed. (Code: %1)","Desculpe, seu pagamento não pôde ser processado. (Código:% 1)"
 "Invalid Payment Method",Método de pagamento inválido
 "Sorry, your payment could not be processed. (Code: ERR01)","Desculpe, seu pagamento não pôde ser processado. (Código: ERR01)"
@@ -22,6 +26,9 @@ Staging,Staging
 Production,Produção
 Authorize,Autorizar
 "Authorize & Capture",Autorizar e capturar
+"Order not found","Pedido não encontrado"
+"Order status is complete, can't change.","O status do pedido está completo, não pode ser alterado."
+"stokens did not match.","stokens não combinou."
 "Place Order",Faça a encomenda
 "%1 installments",% 1 parcelas
 Paymentez,Paymentez
@@ -39,6 +46,8 @@ Environment,Ambiente
 "Sort Order",Ordem de classificação
 "LinkToPay Options",Opções de LinkToPay
 "Active pay with LTP",Pagamento ativo com LTP
+"Allow Partial Payments","Permitir pagamentos parciais"
+"Expiration Days for LinkToPay","Dias de expiração para LinkToPay"
 Credentials,Credenciais
 "Production Server Application Code",Production Server Application Code
 "Production Server Application Key",Production Server Application Key
