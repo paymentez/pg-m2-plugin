@@ -7,6 +7,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Validator\Exception as MagentoValidatorException;
 use Magento\Payment\Observer\AbstractDataAssignObserver;
 use Paymentez\PaymentGateway\Gateway\Config\CardConfig;
+use Paymentez\PaymentGateway\Gateway\Config\LinkToPayConfig;
 use Paymentez\PaymentGateway\Gateway\Config\GatewayConfig;
 use Paymentez\PaymentGateway\Helper\Logger;
 
@@ -37,7 +38,6 @@ class DataAssignObserver extends AbstractDataAssignObserver
         $data = $this->readDataArgument($observer);
         $paymentInfo = $method->getInfoInstance();
         $additional_data = $data->getDataByKey('additional_data');
-
         switch ($data->getDataByKey('method')) {
 
             case CardConfig::CODE:
@@ -46,15 +46,16 @@ class DataAssignObserver extends AbstractDataAssignObserver
 
                 $paymentInfo->setAdditionalInformation('installment', $installment);
                 $paymentInfo->setAdditionalInformation('token', $token);
-                // TODO: Implement more fields as: bin, termination, brand
-                $paymentInfo->setAdditionalInformation('bin', '411111');
-                $paymentInfo->setAdditionalInformation('termination', '1111');
-                $paymentInfo->setAdditionalInformation('brand', 'Visa');
                 break;
 
             //  Add here more payment methods as: LTP, Cash, PSE
+            case LinkToPayConfig::CODE:
+                $installment = isset($additional_data['installment']) ? $additional_data['installment'] : 1;
 
+                $paymentInfo->setAdditionalInformation('installment', $installment);
+                break;
         }
         $this->logger->debug(sprintf('DataAssignObserver.execute $paymentInfo:'), (array)$paymentInfo);
+
     }
 }

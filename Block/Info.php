@@ -32,18 +32,31 @@ class Info extends ConfigurableInfo
     {
         $transport = parent::_prepareSpecificInformation($transport);
         $payment = $this->getInfo();
-        $info = [
-            'Card' => sprintf('%s XXXX %s', $payment->getAdditionalInformation('card_bin'), $payment->getAdditionalInformation('card_termination')),
-            'Card Type' => Brand::getBrandName($payment->getAdditionalInformation('card_type')),
-            'Authorization Code' => $payment->getAdditionalInformation('authorization_code'),
-            'Installments' => $payment->getAdditionalInformation('installment')
-        ];
+        $method = $this->getMethod()->getCode();
+        if ($method == 'paymentez_card') {
+            $info = [
+                'Card' => sprintf('%s XXXX %s', $payment->getAdditionalInformation('card_bin'), $payment->getAdditionalInformation('card_termination')),
+                'Card Type' => Brand::getBrandName($payment->getAdditionalInformation('card_type')),
+                'Authorization Code' => $payment->getAdditionalInformation('authorization_code'),
+                'Installments' => $payment->getAdditionalInformation('installment'),
+                'Message' => $payment->getAdditionalInformation('message'),
+                'Carrier Code' => $payment->getAdditionalInformation('carrier_code'),
+            ];
 
-        if (!$this->getIsSecureMode()) {
-            $info['Carrier Code'] = $payment->getAdditionalInformation('carrier_code');
-            $info['Message'] = $payment->getAdditionalInformation('message');
-            $info['Status Detail'] = $payment->getAdditionalInformation('status_detail');
-            $info['Add Card Transaction'] = $payment->getAdditionalInformation('card_tr');
+            if (!$this->getIsSecureMode()) {
+                $info['Carrier Code'] = $payment->getAdditionalInformation('carrier_code');
+                $info['Message'] = $payment->getAdditionalInformation('message');
+                $info['Status Detail'] = $payment->getAdditionalInformation('status_detail');
+                $info['Add Card Transaction'] = $payment->getAdditionalInformation('card_tr');
+            }
+        } elseif ($method == 'paymentez_ltp') {
+            $info = [
+                'LinkToPay'          => $payment->getAdditionalInformation('ltp_url'),
+                'Expiration Days'    => $payment->getAdditionalInformation('expiration_days'),
+                'Authorization Code' => $payment->getAdditionalInformation('authorization_code'),
+                'Message'            => $payment->getAdditionalInformation('message'),
+                'Carrier Code'       => $payment->getAdditionalInformation('carrier_code'),
+            ];
         }
 
         return $transport->addData($info);

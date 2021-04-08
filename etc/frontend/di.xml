@@ -5,6 +5,9 @@
             <argument name="configProviders" xsi:type="array">
                 <item name="paymentez_card_config_provider" xsi:type="object">Paymentez\PaymentGateway\Model\Ui\CardConfigProvider</item>
             </argument>
+            <argument name="configProviders" xsi:type="array">
+                <item name="paymentez_ltp_config_provider" xsi:type="object">Paymentez\PaymentGateway\Model\Ui\LinkToPayConfigProvider</item>
+            </argument>
         </arguments>
     </type>
     <type name="Paymentez\PaymentGateway\Block\Info">
