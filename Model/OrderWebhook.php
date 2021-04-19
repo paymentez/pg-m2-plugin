@@ -91,7 +91,7 @@ class OrderWebhook implements WebhookInterface
           8 => $order::STATE_CANCELED,
       ];
       $status_code = $pg_status_m2[$status_detail];
-      if (in_array($status_detail, [2, 3, 4, 5, 30, 38, 39, 41, 42, 43]) && $status_code == $order::STATE_CANCELED) {
+      if ($status_code == $order::STATE_CANCELED) {
           $transaction_id_m2 = !is_null($payment->getParentTransactionId()) ? $payment->getParentTransactionId() : $payment->getTransactionId();
           $payment->setAmountCanceled($amount);
           $payment->setTransactionId($transaction_id_m2);
