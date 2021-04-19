@@ -89,13 +89,31 @@
                         <config_path>payment/paymentez_ltp/environment</config_path>
                     </field>
 
-                    <field id="ltp_min_order_total" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="ltp_allow_partial_payments" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Allow Partial Payments</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/paymentez_ltp/allow_partial_payments</config_path>
+                    </field>
+
+                    <field id="ltp_allow_installments" translate="label" sortOrder="50" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Allow Installments</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/paymentez_ltp/allow_installments</config_path>
+                    </field>
+
+                    <field id="ltp_expiration_days" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Expiration Days for LinkToPay</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/paymentez_ltp/expiration_days</config_path>
+                    </field>
+
+                    <field id="ltp_min_order_total" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Minimum Order Total</label>
                         <frontend_class>validate-number</frontend_class>
                         <config_path>payment/paymentez_ltp/min_order_total</config_path>
                     </field>
 
-                    <field id="ltp_max_order_total" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <field id="ltp_max_order_total" translate="label comment" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
                         <label>Maximum Order Total</label>
                         <comment>Leave empty to disable limit</comment>
                         <frontend_class>validate-number</frontend_class>

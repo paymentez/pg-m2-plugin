@@ -21,7 +21,6 @@
                                                         <item name="renders" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
-
                                                                 <item name="paymentez_gateway" xsi:type="array">
                                                                     <item name="component" xsi:type="string">
                                                                         Paymentez_PaymentGateway/js/view/payment/paymentez
@@ -30,9 +29,11 @@
                                                                         <item name="paymentez_card" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
+                                                                        <item name="paymentez_ltp" xsi:type="array">
+                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                        </item>
                                                                     </item>
                                                                 </item>
-
                                                             </item>
                                                         </item>
                                                     </item>

@@ -22,6 +22,14 @@ define(
                 }
             );
         }
+        if (config.paymentez_ltp.is_active) {
+            rendererList.push(
+                {
+                    type: 'paymentez_ltp',
+                    component: 'Paymentez_PaymentGateway/js/view/payment/method-renderer/paymentez_ltp'
+                }
+            );
+        }
         /** Add view logic here if needed */
         return Component.extend({});
     }

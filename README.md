@@ -33,3 +33,11 @@ Now you can see the Paymentez settings in this path `Stores > Configuration > Sa
 
 ## Maintenance
 If you need update the plugin to latest version execute: `composer update paymentez/payment-gateway` or `composer require paymentez/payment-gateway:2.1.8` for specific version.
+
+## Webhook Notifications and Order Updates
+Every time a transaction changes their status you will get an HTTP POST request from Paymentez to your webhook.
+
+The URL that will be used for the order updates via webhook is:
+`https://magentodomain.com/V2/webhook/updateOrderWebhook`
+
+This URL will be configured on Paymentez.
