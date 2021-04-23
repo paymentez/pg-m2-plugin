@@ -15,7 +15,7 @@ define(
                 template: 'Paymentez_PaymentGateway/payment/paymentez_ltp'
             },
             afterPlaceOrder: function () {
-                redirectOnSuccessAction.redirectUrl = url.build("redirectlinktopay/placeorder/placeorder");
+                redirectOnSuccessAction.redirectUrl = url.build("redirectlinktopaypaymentez/placeorder/placeorder");
                 this.redirectAfterPlaceOrder = true;
                 redirectOnSuccessAction.execute();
             }
