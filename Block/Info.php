@@ -39,6 +39,7 @@ class Info extends ConfigurableInfo
                 'Card Type' => Brand::getBrandName($payment->getAdditionalInformation('card_type')),
                 'Authorization Code' => $payment->getAdditionalInformation('authorization_code'),
                 'Installments' => $payment->getAdditionalInformation('installment'),
+                'Installments Type' => $payment->getAdditionalInformation('installment_type'),
                 'Message' => $payment->getAdditionalInformation('message'),
                 'Carrier Code' => $payment->getAdditionalInformation('carrier_code'),
             ];

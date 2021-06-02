@@ -43,6 +43,7 @@ final class CardConfigProvider implements ConfigProviderInterface
                     'environment' => $this->config->getEnvironment(),
                     'brands' => $this->config->getSupportedBrands(),
                     'allow_installments' => $this->config->allowInstallments(),
+                    'installments_types' => $this->config->getInstallmentsTypes()
                 ]
             ]
         ];
