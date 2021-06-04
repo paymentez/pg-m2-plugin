@@ -24,6 +24,26 @@ Chile,Chile
 "Chilean Peso",Peso chileno
 Staging,Staging
 Production,Produção
+"Revolving and deferred without interest (The bank will pay to the commerce the installment, month by month)(Ecuador)","Rotativo e diferido sem juros (O banco pagará ao comerciante a parcela, mês a mês) (Equador)"
+"Deferred with interest (Ecuador, México)","Diferido com juros (Equador, México)"
+"Deferred without interest (Ecuador, México)","Diferido sem juros (Equador, México)"
+"Deferred with interest and months of grace (Ecuador)","Diferido com juros e meses de carência (Equador)"
+"Deferred without interest pay month by month (Ecuador)(Medianet)","Pagamento diferido sem juros mês a mês (Equador) (Medianet)"
+"Deferred without interest and months of grace (Ecuador, México)","Diferido sem juros e meses de carência (Equador, México)"
+"Deferred without interest and months of grace (Ecuador)(Medianet)","Diferido sem juros e meses de carência (Equador) (Medianet)"
+"Deferred without interest promotion bimonthly (Ecuador)","Promoción bimestral diferida sin intereses (Ecuador)"
+"For Diners Club exclusive, deferred with and without interest (Ecuador)","Para Diners Club exclusivo, diferido com e sem juros (Equador)"
+"Deferred with interest pay month by month (Ecuador)(Medianet)","Diferido com pagamento de juros mês a mês (Equador) (Medianet)"
+"Deferred without interest promotions (Supermaxi)(Ecuador)(Medianet)","Promoções diferidas sem juros (Supermaxi) (Equador) (Medianet)"
+"Deferred with interest (Cuota fácil)(Ecuador)(Medianet)","Diferido com juros (Easy fee) (Equador) (Medianet)"
+"Without interest (Rendecion Produmillas)(Ecuador)(Medianet)","Sem juros (Rendecion Produmillas) (Equador) (Medianet)"
+"Without interest sale with promotions (Ecuador)(Medianet)","Venda sem juros com promoções (Equador) (Medianet)"
+"Deferred special without interest (Ecuador)(Medianet)","Especial sem juros diferida (Equador) (Medianet)"
+"Credit without interest (cte smax)(Ecuador)(Medianet)","Crédito sem juros (cte smax) (Equador) (Medianet)"
+"Special credit without interest (smax)(Ecuador)(Medianet)","Crédito especial sem juros (smax) (Equador) (Medianet)"
+"Prepay without interest (smax)(Ecuador)(Medianet)","Pré-pago sem juros (smax) (Equador) (Medianet)"
+"Defered credit without interest (smax)(Ecuador)(Medianet)","Crédito diferido sin intereses (dmax) (Ecuador) (Medianet)"
+"Without interest with months of grace (Supermaxi)(Ecuador)(Medianet)","Sin intereses con meses de gracia (Supermaxi) (Ecuador) (Medianet)"
 Authorize,Autorizar
 "Authorize & Capture",Autorizar e capturar
 "Order not found","Pedido não encontrado"
@@ -31,6 +51,26 @@ Authorize,Autorizar
 "stokens did not match.","stokens não combinou."
 "Place Order",Faça a encomenda
 "%1 installments",% 1 parcelas
+"Revolving and deferred without interest (The bank will pay to the commerce the installment, month by month)","Rotativo e diferido sem juros (O banco pagará ao comerciante a parcela, mês a mês)"
+"Deferred with interest","Adiado com juros"
+"Deferred without interest","Adiado sem juros"
+"Deferred with interest and months of grace","Diferido com juros e meses de carência"
+"Deferred without interest pay month by month","Diferido sem pagamento de juros mês a mês"
+"Deferred without interest and months of grace","Diferido sem juros e meses de carência"
+"Deferred without interest promotion bimonthly","Promoção bimestral diferida sem juros"
+"For Diners Club exclusive, deferred with and without interest","Para Diners Club exclusivo, diferido com e sem juros"
+"Deferred with interest pay month by month","Diferido com pagamento de juros mês a mês"
+"Deferred without interest promotions (Supermaxi)","Promoções diferidas sem juros (Supermaxi)"
+"Deferred with interest (Cuota fácil)","Diferido com juros (taxa fácil)"
+"Without interest (Rendecion Produmillas)","Sem juros (Rendecion Produmillas)"
+"Without interest sale with promotions","Venda sem juros com promoções"
+"Deferred special without interest","Especial diferido sem juros"
+"Credit without interest (cte smax)","Crédito sem juros (cte smax)"
+"Special credit without interest (smax)","Crédito especial sem juros (smax)"
+"Prepay without interest (smax)","Prepago sin intereses (smax)"
+"Defered credit without interest (smax)","Crédito diferido sem juros (smax)"
+"Without interest with months of grace (Supermaxi)","Sem juros com meses de carência (Supermaxi)"
+"Disable Installments","Desativar Cotas"
 Paymentez,Paymentez
 Enabled,Ativado
 "Card Options",Opções de cartão
@@ -40,6 +80,7 @@ Environment,Ambiente
 "Payment Action",Ação de Pagamento
 "Supported Brands",Marcas Suportadas
 "Allow Installments",Permitir parcelas
+"Installments Types","Tipos de parcelas"
 "Minimum Order Total",Total mínimo do pedido
 "Maximum Order Total",Total Máximo do Pedido
 "Leave empty to disable limit",Deixe em branco para desativar o limite
@@ -61,3 +102,4 @@ Credentials,Credenciais
 "Supported Currencies",Moedas suportadas
 Debug,Depurar
 In how many installments do you want to pay?,Quantas parcelas você deseja pagar?
+"Select the installments type to pay", "Selecione o tipo de parcelamento para pagamento"
