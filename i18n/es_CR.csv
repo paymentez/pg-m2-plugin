@@ -80,6 +80,7 @@ Environment,Ambiente
 "Payment Action","Acción de pago"
 "Supported Brands","Marcas soportadas"
 "Allow Installments","Permitir cuotas"
+"Installments Types","Tipos de Cuotas"
 "Minimum Order Total","Mínimo Total de Orden"
 "Maximum Order Total","Máximo Total de Order"
 "Leave empty to disable limit","Dejar vacía para desactivar el límite"

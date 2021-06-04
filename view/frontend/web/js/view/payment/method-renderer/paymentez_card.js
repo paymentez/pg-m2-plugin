@@ -188,6 +188,7 @@ define(
                 ];
                 let installments_type = [
                     {'value': -1, 'text': $t('Disable Installments')},
+                    {'value': 0, 'text': $t('Enable Installments')}
                 ];
                 for (let i = 0; i < installments_options.length; i++) {
                     if (config_installments_types.includes(String(installments_options[i]['value']))) {

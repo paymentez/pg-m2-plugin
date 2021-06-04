@@ -80,6 +80,7 @@ Environment,Environment
 "Payment Action","Payment Action"
 "Supported Brands","Supported Brands"
 "Allow Installments","Allow Installments"
+"Installments Types","Installments Types"
 "Minimum Order Total","Minimum Order Total"
 "Maximum Order Total","Maximum Order Total"
 "Leave empty to disable limit","Leave empty to disable limit"
