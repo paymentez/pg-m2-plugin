@@ -8,7 +8,7 @@ This module is a solution that allows Magento users to easily process payments w
 
 Install the latest version.  `composer require paymentez/payment-gateway`
 
-Install a specific version.  `composer require paymentez/payment-gateway:2.2.3`
+Install a specific version.  `composer require paymentez/payment-gateway:2.3.0`
 
 Once the installation finished, continue with the next commands in your bash terminal.
 
@@ -32,7 +32,7 @@ Now you can see the Paymentez settings in this path `Stores > Configuration > Sa
 
 
 ## Maintenance
-If you need update the plugin to latest version execute: `composer update paymentez/payment-gateway` or `composer require paymentez/payment-gateway:2.2.3` for specific version.
+If you need update the plugin to latest version execute: `composer update paymentez/payment-gateway` or `composer require paymentez/payment-gateway:2.3.0` for specific version.
 
 ## Webhook Notifications and Order Updates
 Every time a transaction changes their status you will get an HTTP POST request from Paymentez to your webhook.
